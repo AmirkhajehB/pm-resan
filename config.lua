@@ -1,0 +1,9 @@
+bot_token = "292842998:AAFkHP-F0ivn5Yue89IDjnyPwYzXqkoa2W0"
+send_api = "https://api.telegram.org/bot"..bot_token
+bot_version = "6.0"
+sudo_name = "khajeh_amir"
+sudo_id = 216507730
+admingp = -216507730
+sudo_num = "989115299755"
+sudo_user = "khajeh_amir"
+sudo_ch = "faze_shabane"
