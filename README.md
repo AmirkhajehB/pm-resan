@@ -1,7 +1,7 @@
 
 
 
-git clone https://github.com/AmirkhajehB/pm-resan.git
+git clone https://github.com/AmirkhajehB/pm-resan2030.git
 
 بسته های زیر نصب شوند
 
