@@ -1,7 +1,7 @@
 
 
 
-git clone https://github.com/TeleCleverGuy/PmResan.git
+git clone https://github.com/AmirkhajehB/pm-resan.git
 
 بسته های زیر نصب شوند
 
