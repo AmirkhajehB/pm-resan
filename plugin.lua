@@ -19,11 +19,10 @@ function run(msg)
 	.."     /end\n   اتمام چت\n\n"
 	.."     /spam {id,num,text}\n   اسپم دادن\n\n"
 	.."     /key\n   کيبرد ادمين\n\n"
-	about_txt = "ربات پیام رسان نسخه vip-"..bot_version.."\nبا قابلیت اینلاین!\n\n`از طریق این ربات حتی اگر ریپورت هم باشید میتوانید با من چت کنید. برای این کار کافیست که یک درخواست چت برایم ارسال کنید و منتظر باشید تا آن را قبول کنم. میتونید از طریق کلید مربوطه شمارتونو برام بفرستید تا در صورت لزوم با شما تماس بگیرم. این ربات قابلیت های دیگه هم داره، میتونید بیوگرافیمو بخونید، شمارمو از  ربات دریافت کنید یا حتی در نسخه ی وی آی پی میتونید از طریق ربات برام اس ام اس ارسال کنید تا اگر به اینترنت دسترسی نداشتم هم پیام شما به من برسه. از طریق قابلیت اینلاین در هر کجا میتونید شماره و در صورت وجود، بیوگرافیمو به اشتراک بذارید.`\n\nاگر مایل به هستید از این ربات برای خودتون داشته باشید، با سازنده ی من تماس بگیرید، اطلاعات تماس سازنده در لینکهای زیر است. این"
-	about_key = {{{text = "ایمیل" , url = "amir.khajeh7@gmail.com"}},{{text = "کانال" , url = "https://telegram.me/faze_shabane"}},{{text = "ایدی سازنده" , url = "https://telegram.me/khajeh_amir"}},{{text = "مهندس امیر" , url = "https://telegram.me/khajeh_amir"}}}
-	start_txt = "سلام دوست عزيز\n\n`از طریق این ربات حتی اگر ریپورت باشی هم میتونی با من چت کنی. این ربات قابلیت های دیگه ای هم داره که از کیبرد زیر میتونی بهشون دست پیدا کنی. اگر از این ربات پیشرفته ی پیام رسان نیاز داری، روی کلید زیر کلیک کن. این ربات ر.`"
-	start_key = {{{text="ساخت ربات پیام رسان",url="https://telegram.me/khajeh_amir"}}}
-	keyboard = {{"ارسال درخواست چت"},{{text="ارسال شماره شما به من",request_contact=true},{text="ارسال مکان شما به من",request_location=true}},{"شماره من","ارسال پیامک به من"},{"بیوگرافی من","ربات نسخه"..bot_version}}
+	about_txt = "\n"
+	start_txt = "`سلام به ربات پیامرسان اسپید خوش آمدید` \n---------------------------------------------\n`برای خرید ربات پیامرسان همین جا پیام دهید`\n` مجهز به سیستم ضد اسپمر`\n `پیام همگانی و آمار ربات`\n`بلاک و انبلاک`\n`و .... کلی قابلیت دیگه`\n`قیمت خرید 13 تومان`\n\n لطفا یک گزینه را انتخاب کنید"
+	start_key = {{{text="کانال ما",url="https://telegram.me/news_speed"}}}
+	keyboard = {{"📋بیوگرافی من📋"},{{text="💠ارسال شماره شما💠",request_contact=true},{text="🏡ارسال لوکیشن شما🏡",request_location=true}},{"📞شماره سازنده📞"},{"🎙شروع چت🎙"}}
 	------------------------------------------------------------------------------------
 	blocks = load_data("blocks.json")
 	chats = load_data("chats.json")
@@ -45,14 +44,14 @@ function run(msg)
 		users[userid] = true
 		save_data("users.json", users)
 		send_inline(msg.from.id, start_txt, start_key)
-		return send_key(msg.from.id, "`کیبرد اصلی:`", keyboard)
+		return send_key(msg.from.id, "`کیبورد فعال شد:`", keyboard)
 	end
 	
 	if msg.text == "/start" then
 		users[userid] = true
 		save_data("users.json", users)
 		send_inline(msg.from.id, start_txt, start_key)
-		return send_key(msg.from.id, "`کیبرد اصلی:`", keyboard)
+		return send_key(msg.from.id, "`کیبورد فعال شد:`", keyboard)
 	elseif msg.contact then
 		if chats.id == msg.from.id then
 		else
@@ -65,7 +64,7 @@ function run(msg)
 					end
 					table.insert(contact[userid], msg.contact.phone_number)
 					save_data("contact.json", contact)
-					send_msg(msg.from.id, "`شماره شما ارسال شد`\n_You'r number_ *Sent*", true)
+					send_msg(msg.from.id, "`شماره شما با موفقیت به دست ما رسید :)`\n_You'r number_ *Sent*", true)
 					send_msg(admingp, (msg.from.first_name or "").." "..(msg.from.last_name or "").." [@"..(msg.from.username or "-----").."] ("..msg.from.id..")", false)
 					return send_fwrd(admingp, msg.from.id, msg.message_id)
 				end
@@ -73,7 +72,7 @@ function run(msg)
 				contact[userid] = {}
 				table.insert(contact[userid], msg.contact.phone_number)
 				save_data("contact.json", contact)
-				send_msg(msg.from.id, "`شماره شما ارسال شد`\n_You'r number_ *Sent*", true)
+				send_msg(msg.from.id, "` شماره شما با موفقیت به دست ما رسید :) `\n_You'r number_ *Sent*", true)
 				send_msg(admingp, (msg.from.first_name or "").." "..(msg.from.last_name or "").." [@"..(msg.from.username or "-----").."] ("..msg.from.id..")", false)
 				return send_fwrd(admingp, msg.from.id, msg.message_id)
 			end
@@ -90,7 +89,7 @@ function run(msg)
 					end
 					table.insert(location[userid], msg.location.longitude)
 					save_data("location.json", location)
-					send_msg(msg.from.id, "`موقعیت مکانی شما ارسال شد`\n_You'r location_ *Sent*", true)
+					send_msg(msg.from.id, "`موقعیت مکانی شما با موفقیت به دست مارسید:)`\n_You'r location_ *Sent*", true)
 					send_msg(admingp, (msg.from.first_name or "").." "..(msg.from.last_name or "").." [@"..(msg.from.username or "-----").."] ("..msg.from.id..")", false)
 					return send_fwrd(admingp, msg.from.id, msg.message_id)
 				end
@@ -98,7 +97,7 @@ function run(msg)
 				location[userid] = {}
 				table.insert(location[userid], msg.location.longitude)
 				save_data("location.json", location)
-				send_msg(msg.from.id, "`موقعیت مکانی شما ارسال شد`\n_You'r location_ *Sent*", true)
+				send_msg(msg.from.id, "` موقعیت مکانی شما با موفقیت به دست مارسید:) `\n_You'r location_ *Sent*", true)
 				send_msg(admingp, (msg.from.first_name or "").." "..(msg.from.last_name or "").." [@"..(msg.from.username or "-----").."] ("..msg.from.id..")", false)
 				return send_fwrd(admingp, msg.from.id, msg.message_id)
 			end
@@ -116,19 +115,23 @@ function run(msg)
 			elseif #target == 2 then
 				send_msg(admingp, "`شخص مورد نظر در حال اسپم خوردن است`\n_Your target_ *Spamming*", true)
 				for i=1,tonumber(target[2]) do
-					send_msg(tonumber(target[1]), "Umbrella team\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUmbrella Team")
+					send_msg(tonumber(target[1]), "speed team\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nspeed Team")
 				end
 				return send_msg(admingp, "`اسپم به اتمام رسید`\n_Spamming_ *Stoped*", true)
 			else
 				send_msg(admingp, "`شخص مورد نظر در حال اسپم خوردن است`\n_Your target_ *Spamming*", true)
 				for i=1,100 do
-					send_msg(tonumber(target[1]), "Umbrella team\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUmbrella Team")
+					send_msg(tonumber(target[1]), "speed team\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nspeed Team")
 				end
 				return send_msg(admingp, "`اسپم به اتمام رسید`\n_Spamming_ *Stoped*", true)
 			end
 		else
 			return send_msg(admingp, "`بعد از این دستور آی دی شخص مورد نظر را با درج یک فاصله وارد کنید`\n_after this command type_ *Target ID*", true)
 		end
+	elseif msg.text:lower() == "ticket" then
+		users[userid] = 4
+		save_data("users.json", users)
+		return send_key(msg.from.id, "*Send your message...*\n`you can send Text, Photo, Video and more...`", {{"Cancel"}}, true)
 	elseif msg.text:find("/sendtoall") and msg.chat.id == admingp then
 		local usertarget = msg.text:input()
 		if usertarget then
@@ -141,7 +144,7 @@ function run(msg)
 		else
 			return send_msg(admingp, "`بعد از این دستور پیام خود را وارد کنید`\n_after this command type_ *Your Message*", true)
 		end
-	elseif msg.text == "/contact" or msg.text:lower() == "my contact" or msg.text == "شماره من" then
+	elseif msg.text == "/contact" or msg.text:lower() == "my contact" or msg.text == "📞شماره سازنده📞" then
 		return send_phone(msg.from.id, "+"..sudo_num, sudo_name)
 	elseif msg.text == "/users" and msg.chat.id == admingp then
 		local list = ""
@@ -195,7 +198,7 @@ function run(msg)
 			end
 		end
 		return send_key(admingp, "*For accept or delete request select a item:*", list, true)
-	elseif msg.text == "/req" or msg.text:lower() == "chat request" or msg.text == "ارسال درخواست چت" then
+	elseif msg.text == "/req" or msg.text:lower() == "chat request" or msg.text == "🎙شروع چت🎙" then
 		if msg.chat.id == admingp then
 			local list = ""
 			i=0
@@ -208,13 +211,13 @@ function run(msg)
 			return send_msg(admingp, "*Request list:\n\n*"..list, true)
 		else
 			if requests[userid] then
-				return send_msg(msg.from.id, "`شما قبلا درخواست ارسال کردید، منتظر باشید رسیدگی شود`\n_You have_ *Open Request* _please wait_", true)
+				return send_msg(msg.from.id, "دوست من قبلا یک درخواست به من دادی منتظر باش تا جوابتو بدم", true)
 			elseif msg.from.id == chats.id then
 				return send_msg(msg.from.id, "`!!باشه بهش میگم!!`", true)
 			else
 				requests[userid] = true
 				save_data("requests.json", requests)
-				send_msg(msg.from.id, "`درخواست شما ارسال شد، منتظر بمانید`\n_You'r request_ *Sent*, _please wait_", true)
+				send_msg(msg.from.id, "`درخواست چت شما به دست من رسید صبر کن تا جواب بدم:)`", true)
 				local text = "شما از مشخصات زیر درخواست چت دارید:\nYou have chat request of this user:\n\n"
 				.."Name: "..(msg.from.first_name or "").." "..(msg.from.last_name or "").."\nUser: @"..(msg.from.username or "-----").."\nID: "..msg.from.id.."\n\n"
 				--.."برای پزیرش گزینه ی اول را ارسال کنید، برای رد گزینه ی دوم را و برای بلاک کردن گزینه ی سوم را:\nfor accept press first option or for delete request press option 2 and for block user, press option 3:\n\n"
@@ -225,7 +228,7 @@ function run(msg)
 				return send_msg(admingp, text, false)
 			end
 		end
-	elseif msg.text == '/sms' or msg.text:lower() == "send sms" or msg.text == "ارسال پیامک به من" then
+	elseif msg.text == '/ass' or msg.text:lower() == "send f" or msg.text == "س پیامک به من" then
 		if admins[userid] then
 			if msg.reply_to_message then
 				if msg.reply_to_message.from.id == bot.id then
@@ -262,7 +265,7 @@ function run(msg)
 			f:close()
 			return send_msg(admingp, "`آواتار شما ذخیره شد`\n_You'r avatar_ *Saved*", true)
 		end
-	elseif msg.text:find("/info") or msg.text:lower() == "my info" or msg.text == "بیوگرافی من" then
+	elseif msg.text:find("/info") or msg.text:lower() == "my info" or msg.text == "📋بیوگرافی من📋" then
 		if msg.chat.id == admingp then
 			local usertarget = msg.text:input()
 			if usertarget then
@@ -283,7 +286,7 @@ function run(msg)
 			else
 				infotxts = ""
 			end
-			bioinfo = infotxts.."*Name:* "..sudo_name.."\n*Username:* [@"..sudo_user.."](https://telegram.me/"..sudo_user..")\n*Mobile:* +"..sudo_num.."\n*Telegram ID:* "..sudo_id.."\n*Channel:* [@"..sudo_ch.."](https://telegram.me/"..sudo_ch..")\n\n_Powered by_ [amir](https://telegram.me/khajeh_amir)"
+			bioinfo = infotxts.."*Name:* "..sudo_name.."\n*Username:* [@"..sudo_user.."](https://telegram.me/"..sudo_user..")\n*Mobile:* +"..sudo_num.."\n*Telegram ID:* "..sudo_id.."\n*Channel:* [@"..sudo_ch.."](https://telegram.me/"..sudo_ch..")\n"
 			send_msg(msg.chat.id, bioinfo, true)
 			local f = io.open("./avatar.webp")
 			if f then
@@ -328,17 +331,17 @@ function run(msg)
 			end
 			blocks[tostring(usertarget)] = true
 			save_data("blocks.json", blocks)
-			send_msg(tonumber(usertarget), "`شما بلاک شدید!`\n_You are_ *Blocked!*", true)
+			send_msg(tonumber(usertarget), "`با عرض پوزش شما بلاک شدید`\n_You are_ *Blocked!*", true)
 			send_msg(admingp, "`شخص مورد نظر بلاک شد`\n_You'r target_ *Blocked*", true)
 			if requests[tostring(usertarget)] then
 				requests[tostring(usertarget)] = false
 				save_data("requests.json", requests)
-				send_msg(tonumber(usertarget), "`درخواست چت شما رد شد`\n_You'r chat request_ *Deleted*", true)
+				send_msg(tonumber(usertarget), "`دوست عزیز درخواست چت شما قبول نشد لطفا از ارسال دوباره خودداری نمایید`", true)
 				send_msg(admingp, "`درخواست چت شخص مورد نظر رد شد`\n_You'r target chat request_ *Deleted*", true)
 			elseif chats.id == tonumber(usertarget) then
 				chats.id = 0
 				save_data("chats.json", chats)
-				send_msg(tonumber(usertarget), "`چت بسته شد`\n_You'r chatroom_ *Closed*", true)
+				send_msg(tonumber(usertarget), "`دوست من چت تموم شد`", true)
 				send_msg(admingp, "`چت بسته شد`\n_You'r chatroom_ *Closed*", true)
 			end
 			return
@@ -346,7 +349,7 @@ function run(msg)
 			if chats.id > 0 then
 				blocks[tostring(chats.id)] = true
 				save_data("blocks.json", blocks)
-				send_msg(chats.id, "`شما بلاک شدید!`\n_You are_ *Blocked!*", true)
+				send_msg(chats.id, "`با عرض پوزش شما بلاک شدید`", true)
 				send_msg(admingp, "`شخص مورد نظر بلاک شد`\n_You'r target_ *Blocked*", true)
 				chats.id = 0
 				save_data("chats.json", chats)
@@ -365,17 +368,17 @@ function run(msg)
 					end
 					blocks[tostring(usertarget)] = true
 					save_data("blocks.json", blocks)
-					send_msg(tonumber(usertarget), "`شما بلاک شدید!`\n_You are_ *Blocked!*", true)
+					send_msg(tonumber(usertarget), "`با عرض پوزش شما بلاک شدید`", true)
 					send_msg(admingp, "`شخص مورد نظر بلاک شد`\n_You'r target_ *Blocked*", true)
 					if requests[tostring(usertarget)] then
 						requests[tostring(usertarget)] = false
 						save_data("requests.json", requests)
-						send_msg(tonumber(usertarget), "`درخواست چت شما رد شد`\n_You'r chat request_ *Deleted*", true)
+						send_msg(tonumber(usertarget), "`درخواست چت شما رد شد`", true)
 						send_msg(admingp, "`درخواست چت شخص مورد نظر رد شد`\n_You'r target chat request_ *Deleted*", true)
 					elseif chats.id == tonumber(usertarget) then
 						chats.id = 0
 						save_data("chats.json", chats)
-						send_msg(tonumber(usertarget), "`چت بسته شد`\n_You'r chatroom_ *Closed*", true)
+						send_msg(tonumber(usertarget), "`چت تموم شد`", true)
 						send_msg(admingp, "`چت بسته شد`\n_You'r chatroom_ *Closed*", true)
 					end
 					return
@@ -388,7 +391,7 @@ function run(msg)
 			if blocks[tostring(usertarget)] then
 				blocks[tostring(usertarget)] = false
 				save_data("blocks.json", blocks)
-				send_msg(tonumber(usertarget), "`شما آنبلاک شدید!`\n_You are_ *Unblocked!*", true)
+				send_msg(tonumber(usertarget), "`خبرخوب شما انبلاک شدید`", true)
 				return send_msg(admingp, "`شخص مورد نظر آنبلاک شد`\n_You'r target_ *Unblocked*", true)
 			end
 			return send_msg(admingp, "`شخص مورد نظر بلاک نیست`\n_You target_ *Not Block*", true)
@@ -401,7 +404,7 @@ function run(msg)
 			if requests[tostring(usertarget)] then
 				requests[tostring(usertarget)] = false
 				save_data("requests.json", requests)
-				send_msg(tonumber(usertarget), "`درخواست چت شما رد شد`\n_You'r chat request_ *Deleted*", true)
+				send_msg(tonumber(usertarget), "`درخواست چت شما رد شد`", true)
 				return send_msg(admingp, "`درخواست چت شخص مورد نظر رد شد`\n_You'r target chat request_ *Deleted*", true)
 			else
 				return send_msg(admingp, "`درخواستی از شخص مورد نظر وجود ندارد`\n_You'r target_ *Have Not* _chat request_", true)
@@ -414,7 +417,7 @@ function run(msg)
 				if requests[tostring(usertarget)] then
 					requests[tostring(usertarget)] = false
 					save_data("requests.json", requests)
-					send_msg(tonumber(usertarget), "`درخواست چت شما رد شد`\n_You'r chat request_ *Deleted*", true)
+					send_msg(tonumber(usertarget), "`درخواست چت شما رد شد`", true)
 					return send_msg(admingp, "`درخواست چت شخص مورد نظر رد شد`\n_You'r target chat request_ *Deleted*", true)
 				else
 					return send_msg(admingp, "`درخواستی از شخص مورد نظر وجود ندارد`\n_You'r target_ *Have Not* _chat request_", true)
@@ -434,7 +437,7 @@ function run(msg)
 			save_data("requests.json", requests)
 			chats.id = tonumber(usertarget)
 			save_data("chats.json", chats)
-			send_msg(tonumber(usertarget), "`چت آغاز شد، میتوانید گپ زدن را شروع کنید`\n_Chat_ *Started*", true)
+			send_msg(tonumber(usertarget), "`خب چت شروع شد حالا بگو با من چیکار داری`", true)
 			return send_msg(admingp, "`چت آغاز شد`\n_Chat_ *Started*", true)
 		else
 			if msg.text == "/chat" then
@@ -448,7 +451,7 @@ function run(msg)
 				save_data("requests.json", requests)
 				chats.id = tonumber(usertarget)
 				save_data("chats.json", chats)
-				send_msg(tonumber(usertarget), "`چت آغاز شد، میتوانید گپ زدن را شروع کنید`\n_Chat_ *Started*", true)
+				send_msg(tonumber(usertarget), "` خب چت شروع شد حالا بگو با من چیکار داری` ", true)
 				return send_msg(admingp, "`چت آغاز شد`\n_Chat_ *Started*", true)
 			end
 		end
@@ -457,7 +460,7 @@ function run(msg)
 			return send_msg(admingp, "`چت باز موجود نیست`\n_You haven't_ *Open Chat*", true)
 		end
 		send_msg(admingp, "`چت با "..chats.id.." بسته شد`\n_Chat with "..chats.id.."_ *Closed*", true)
-		send_msg(chats.id, "`چت بسته شد`\n_Chat_ *Closed*", true)
+		send_msg(chats.id, "`چت تموم شد`", true)
 		chats.id = 0
 		save_data("chats.json", chats)
 		return
@@ -467,7 +470,7 @@ function run(msg)
 		else
 			return send_inline(msg.chat.id, about_txt, about_key)
 		end
-	elseif msg.text == "/about" or msg.text:lower() == "about v"..bot_version or msg.text == "ربات نسخه"..bot_version then
+	elseif msg.text == "/ab=out" or msg.text:lower() == "abo€ut v"..bot_version or msg.text == "ربات€ نسخه"..bot_version then
 		return send_inline(msg.chat.id, about_txt, about_key)
 	end
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -480,9 +483,9 @@ function run(msg)
 		return send_fwrd(admingp, msg.from.id, msg.message_id)
 	else
 		if requests[tostring(msg.from.id)] then
-			return send_msg(msg.from.id, "`منتظر بمانید تا درخواست چت شما تایید شود`\n_Please wait for_ "..sudo_name.." *Accept You*", true)
+			return send_msg(msg.from.id, "`خب درخواست شما به من رسید لطفا منتظر باش تا جواب بدم`", true)
 		else
-			return send_msg(msg.from.id, "`اول درخواست چت ارسال کنید`\n_First send_ *chat request* _with_ /req", true)
+			return send_msg(msg.from.id, "`دستور مورد نظر یافت نشد`\nلطفا یک‌گزینه را انتخاب کنید", true)
 		end
 	end
 end
@@ -497,7 +500,7 @@ function inline(msg)
 	else
 		infotxtin = ""
 	end
-	bioinfo = infotxtin.."*Name:* "..sudo_name.."\n*Username:* [@"..sudo_user.."](https://telegram.me/"..sudo_user..")\n*Mobile:* +"..sudo_num.."\n*Telegram ID:* "..sudo_id.."\n*Channel:* [@"..sudo_ch.."](https://telegram.me/"..sudo_ch..")\n\n_Powered by_ [Umbrella Team](https://telegram.me/umbrellateam)"
+	bioinfo = infotxtin.."*Name:* "..sudo_name.."\n*Username:* [@"..sudo_user.."](https://telegram.me/"..sudo_user..")\n*Mobile:* +"..sudo_num.."\n*Telegram ID:* "..sudo_id.."\n*Channel:* [@"..sudo_ch.."](https://telegram.me/"..sudo_ch..")\n\n [speed Team](https://telegram.me/news_speed)"
 	tabless = '[{"text":"اکانت اصلی من","url":"https://telegram.me/'..sudo_user..'"}],[{"text":"کانال شخصی من","url":"https://telegram.me/'..sudo_ch..'"}],[{"text":"کانال سازنده","url":"https://telegram.me/umbrellateam"},{"text":"سازنده ربات","url":"https://telegram.me/shayansoftbot"}]'
 	info_inline = '{"type":"article","parse_mode":"Markdown","id":"2","title":"بیوگرافی من","description":"هر آنچه درباره من باید بدانید...","message_text":"'..bioinfo..'","thumb_url":"'..thumb..'pv_bio.png","reply_markup":{"inline_keyboard":['..tabless..']}}'
 	phone_inline = '{"type":"contact","id":"1","phone_number":"'..sudo_num..'","first_name":"'..sudo_name..'","last_name":"","thumb_url":"'..thumb..'pv_phone.png"},'
